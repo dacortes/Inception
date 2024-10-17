@@ -1,0 +1,23 @@
+[mysqld]
+port=3306
+user=mysql
+
+basedir=/usr
+datadir=/var/lib/mysql
+tmpdir=/tmp
+
+pid_file=/run/mysqld/mysqld.pid
+socket=/var/run/mysqld/mysqld.sock
+
+bind-address=0.0.0.0
+
+query_cache_limit = 1M
+query_cache_size = 16M
+
+character_set_server = utf8mb4
+collation_server = utf8mb4_general_ci
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
