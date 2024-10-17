@@ -1,0 +1,7 @@
+services:
+  nginx:
+    image: img-nginx
+    container_name: cont-nginx
+    ports:
+      - "8080:8080"
+    restart: always
