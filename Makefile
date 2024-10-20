@@ -49,16 +49,28 @@ up:
 	@docker compose --file $(DK_COMPOSE) up --detach
 
 down:
-	@printf "clear [$(GREEN)$(ligth)docker-compose$(END)]\n"
+	@printf "clear [$(YELLOW)$(ligth)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) down
 fdown:
-	@printf "$(ligth)full clear [$(GREEN)docker-compose$(END)]\n"
+	@printf "$(ligth)full clear [$(YELLOW)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) down --volumes
 	@printf "$(ligth)Clear Image [$(YELLOW)nginx$(END)]\n"
-	@$(IMG_RM) img-nginx
+	@if docker image inspect img-nginx > /dev/null 2>&1; then \
+		$(IMG_RM) img-nginx; \
+	else \
+		printf "$(ligth)Image [$(ligth)$(RED)nginx$(END)$(ligth)] does not exist, skipping removal$(END)\n"; \
+	fi
 	@printf "$(ligth)Clear Image [$(YELLOW)mariadb$(END)]\n"
-	@$(IMG_RM) img-mariadb
+	@if docker image inspect img-mariadb > /dev/null 2>&1; then \
+		$(IMG_RM) img-mariadb; \
+	else \
+		printf "$(ligth)Image [$(ligth)$(RED)mariadb$(END)$(ligth)] does not exist, skipping removal$(END)\n"; \
+	fi
 	@printf "$(ligth)Clear Image [$(YELLOW)wordpress + php$(END)]\n"
-	@$(IMG_RM) img-wordpress
+	@if docker image inspect img-wordpress > /dev/null 2>&1; then \
+		$(IMG_RM) img-wordpress; \
+	else \
+		printf "$(ligth)Image [$(ligth)$(RED)wordpress + php$(END)$(ligth)] does not exist, skipping removal$(END)\n"; \
+	fi
 
 .PHONY: all down fdown
