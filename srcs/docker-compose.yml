@@ -5,3 +5,9 @@ services:
     ports:
       - "8080:8080"
     restart: always
+  mariadb:
+    image: img-mariadb
+    container_name: cont-mariadb
+    ports:
+      - "3306:3306"
+    restart: always
