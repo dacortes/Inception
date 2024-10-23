@@ -5,9 +5,23 @@ services:
     ports:
       - "8080:8080"
     restart: always
+    env_file:
+      - .env
+
   mariadb:
     image: img-mariadb
     container_name: cont-mariadb
     ports:
       - "3306:3306"
     restart: always
+    env_file:
+      - .env
+
+  wordpress:
+    image: img-wordpress
+    container_name: cont-wordpress
+    ports:
+      - "9000:9000"
+    restart: always
+    env_file:
+      - .env

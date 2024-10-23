@@ -1,7 +1,6 @@
 FROM alpine:3.19
 
-EXPOSE 8080
-EXPOSE 80
+EXPOSE 443
 
 RUN apk update && \
     apk add --no-cache openrc && \
