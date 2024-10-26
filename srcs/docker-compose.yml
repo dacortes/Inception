@@ -2,26 +2,45 @@ services:
   nginx:
     image: img-nginx
     container_name: cont-nginx
+    depends_on:
+      - wordpress
     ports:
-      - "8080:8080"
+      - "443:443"
     restart: always
     env_file:
       - .env
+    volumes:
+      - wordpress_vol:/var/www/html
 
   mariadb:
     image: img-mariadb
     container_name: cont-mariadb
-    ports:
-      - "3306:3306"
     restart: always
     env_file:
       - .env
+    volumes:
+      - mariadb_vol:/var/lib/mysql/
 
   wordpress:
     image: img-wordpress
     container_name: cont-wordpress
-    ports:
-      - "9000:9000"
     restart: always
     env_file:
       - .env
+    volumes:
+      - wordpress_vol:/var/www/html
+
+volumes:
+  mariadb_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/dacortes/data/data_bases
+      o: bind
+
+  wordpress_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/dacortes/data/wordpress
+      o: bind

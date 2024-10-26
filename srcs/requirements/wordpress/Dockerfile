@@ -1,7 +1,5 @@
 FROM alpine:3.19
 
-EXPOSE 9000
-
 RUN apk update && \
     apk add --no-cache \
     curl \
@@ -27,7 +25,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 RUN mkdir -p /run/php/ && chmod 755 /run/php/
 
-COPY conf/php-fpm.conf /etc/php81/php-fpm.d/php-fpm.conf
+COPY conf/php-fpm.conf /etc/php81/php-fpm.d/www.conf
 
 COPY --chmod=755 conf/wordpress.sh /usr/local/bin/wordpress.sh
 
