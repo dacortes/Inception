@@ -51,6 +51,12 @@ up:
 down:
 	@printf "clear [$(YELLOW)$(ligth)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) down
+clear:
+	@printf "clear [$(YELLOW)$(ligth)data bases$(END)]\n"
+	@rm -rf  /home/dacortes/data/data_bases/*
+	@printf "clear [$(YELLOW)$(ligth)data wordpress$(END)]\n"
+	@rm -rf /home/dacortes/data/wordpress/*
+
 fdown:
 	@printf "$(ligth)full clear [$(YELLOW)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) down --volumes
