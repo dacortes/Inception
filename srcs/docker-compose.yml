@@ -1,7 +1,7 @@
 services:
   nginx:
     image: img-nginx
-    container_name: cont-nginx
+    container_name: nginx
     depends_on:
       - wordpress
     ports:
@@ -14,7 +14,7 @@ services:
 
   mariadb:
     image: img-mariadb
-    container_name: cont-mariadb
+    container_name: mariadb
     restart: always
     env_file:
       - .env
@@ -23,7 +23,7 @@ services:
 
   wordpress:
     image: img-wordpress
-    container_name: cont-wordpress
+    container_name: wordpress
     restart: always
     env_file:
       - .env
