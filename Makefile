@@ -80,7 +80,7 @@ clear:
 	@ls /home/dacortes/data/wordpress/
 	@rm -rf /home/dacortes/data/wordpress/*
 
-fdown:
+fdown: clear
 	@printf "$(ligth)full clear [$(YELLOW)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) down --volumes
 	@printf "$(ligth)Clear Image [$(YELLOW)nginx$(END)]\n"

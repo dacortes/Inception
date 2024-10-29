@@ -1,8 +1,6 @@
 #! /bin/sh
-mysqld & 
-sleep 10
-
-
+mysqld &
+sleep 5
 if [ ! -d /var/lib/mysql/$DATA_BASE_NAME ]; then
     echo "Creating database..."
     mysql -e "CREATE DATABASE $DATA_BASE_NAME;"
@@ -18,5 +16,5 @@ if [ ! -d /var/lib/mysql/$DATA_BASE_NAME ]; then
 fi
 
 mysqladmin -u $MARIADB_ROOT_USER --password=$MARIADB_ROOT_PASSWORD shutdown
-sleep 10
+sleep 5
 mysqld
