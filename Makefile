@@ -12,6 +12,11 @@ PATH_NGINGX = srcs/requirements/nginx/.
 PATH_MARIADB = srcs/requirements/mariadb/.
 PARH_WORDPRESS = srcs/requirements/wordpress/.
 
+LOGIN_NAME = dacortes
+FILE = data
+WP_FILE = wordpress
+DB_FILE = data_bases
+
 ################################################################################
 #                               BOLD COLORS                                    #
 ################################################################################
@@ -36,15 +41,31 @@ italic = \033[3m
 #                               MAKE RULES                                     #
 ################################################################################
 
-all: up
+all: file img up
 
-up:
+file:
+	@printf "$(ligth)Checking directories$(END)\n"
+	@if [ ! -d "/home/dacortes/data" ]; then \
+		printf "$(ligth)Creating directory [$(GREEN)data$(END)]\n"; \
+		mkdir -p /home/dacortes/data; \
+	fi
+	@if [ ! -d "/home/dacortes/data/data_bases" ]; then \
+		printf "$(ligth)Creating directory [$(GREEN)data_bases$(END)]\n"; \
+		mkdir -p /home/dacortes/data/data_bases; \
+	fi
+	@if [ ! -d "/home/dacortes/data/wordpress" ]; then \
+		printf "$(ligth)Creating directory [$(GREEN)wordpress$(END)]\n"; \
+		mkdir -p /home/dacortes/data/wordpress; \
+	fi
+
+img:
 	@printf "$(ligth)Building Image [$(BLUE)nginx$(END)]\n"
 	@$(BLD_DK) img-nginx $(PATH_NGINGX)
 	@printf "$(ligth)Building Image [$(BLUE)mariadb$(END)]\n"
 	@$(BLD_DK) img-mariadb $(PATH_MARIADB)
 	@printf "$(ligth)Building Image [$(BLUE)wordpress & php$(END)]\n"
 	@$(BLD_DK) img-wordpress $(PARH_WORDPRESS)
+up:
 	@printf "$(ligth)Building [$(GREEN)docker-compose$(END)]\n"
 	@docker compose --file $(DK_COMPOSE) up --detach
 
@@ -53,8 +74,10 @@ down:
 	@docker compose --file $(DK_COMPOSE) down
 clear:
 	@printf "clear [$(YELLOW)$(ligth)data bases$(END)]\n"
+	@ls /home/dacortes/data/data_bases/
 	@rm -rf  /home/dacortes/data/data_bases/*
 	@printf "clear [$(YELLOW)$(ligth)data wordpress$(END)]\n"
+	@ls /home/dacortes/data/wordpress/
 	@rm -rf /home/dacortes/data/wordpress/*
 
 fdown:
@@ -79,4 +102,6 @@ fdown:
 		printf "$(ligth)Image [$(ligth)$(RED)wordpress + php$(END)$(ligth)] does not exist, skipping removal$(END)\n"; \
 	fi
 
-.PHONY: all down fdown
+re: fdown img up 
+
+.PHONY: all img up down fdown

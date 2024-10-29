@@ -22,4 +22,3 @@ sleep 10
 mysqld
 echo "Tailing logs..."
 tail -f
-

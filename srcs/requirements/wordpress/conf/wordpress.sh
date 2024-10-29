@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 30
 
 if [ ! -f wp-config.php ]; then
     wp core download --allow-root
