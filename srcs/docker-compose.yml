@@ -11,6 +11,8 @@ services:
       - .env
     volumes:
       - wordpress_vol:/var/www/html
+    networks:
+      - netpichito
 
   mariadb:
     image: img-mariadb
@@ -20,6 +22,8 @@ services:
       - .env
     volumes:
       - mariadb_vol:/var/lib/mysql/
+    networks:
+      - netpichito
 
   wordpress:
     image: img-wordpress
@@ -29,6 +33,8 @@ services:
       - .env
     volumes:
       - wordpress_vol:/var/www/html
+    networks:
+      - netpichito
 
 volumes:
   mariadb_vol:
@@ -44,3 +50,7 @@ volumes:
       type: none
       device: /home/dacortes/data/wordpress
       o: bind
+
+networks:
+    netpichito:
+        driver: bridge
