@@ -31,4 +31,4 @@ COPY --chmod=755 conf/wordpress.sh /usr/local/bin/wordpress.sh
 
 WORKDIR /var/www/html/
 
-ENTRYPOINT ["/bin/bash", "/usr/local/bin/wordpress.sh"]
+ENTRYPOINT ["/usr/local/bin/wordpress.sh"]
