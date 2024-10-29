@@ -20,5 +20,3 @@ fi
 mysqladmin -u $MARIADB_ROOT_USER --password=$MARIADB_ROOT_PASSWORD shutdown
 sleep 10
 mysqld
-echo "Tailing logs..."
-tail -f
